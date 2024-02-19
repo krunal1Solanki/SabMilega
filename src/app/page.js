@@ -1,95 +1,75 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import React from 'react';
+import { Box, Flex, Heading, Text, Button } from '@chakra-ui/react';
+import Image from 'next/image';
 
-export default function Home() {
+import image1 from '../../public/image1.jpeg';
+import image2 from '../../public/image2.jpeg';
+import image3 from '../../public/image3.jpeg';
+import image4 from '../../public/image4.webp';
+import Header from '../Components/Header';
+
+const Page = () => {
+  const categories = [
+    {
+      title: 'Consumer Goods',
+      description: 'Explore a variety of everyday products for personal use.',
+      image: image1,
+    },
+    {
+      title: 'Industrial Products',
+      description: 'Discover essential goods and equipment for various industries.',
+      image: image2,
+    },
+    {
+      title: 'Technology',
+      description: 'Experience the latest in electronic devices and technological innovations.',
+      image: image3,
+    },
+    {
+      title: 'Lifestyle',
+      description: 'Find products related to leisure, entertainment, and personal interests.',
+      image: image4,
+    },
+  ];
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <Box minH='100vh'>
+      <Header />  
+      <Flex direction="column" align="center" pt={4} bg="gray.100">
+        <Flex direction="column" align="center" p="8" pt="20">
+          <Heading mb="8" color="teal.500">
+            Explore Categories
+          </Heading>
+          <Flex flexWrap="wrap" justifyContent="space-between" maxW="800px">
+            {categories.map((category, index) => (
+              <Box key={index} width={{ base: '100%', md: '48%' }} mb="4" ml={index%2 != 0 ? '2%' : 0} borderRadius="lg" mt={3} overflow="hidden" boxShadow="lg">
+                <Box position="relative" height="300px">
+                  <Image
+                    src={category.image}
+                    alt={category.title}
+                    layout="fill"
+                    objectFit="cover"
+                    borderRadius="lg"
+                  />
+                </Box>
+                <Box p="4" bg="white">
+                  <Heading fontSize="xl" mb="2" color="teal.500">
+                    {category.title}
+                  </Heading>
+                  <Text color="gray.600" mb="4">
+                    {category.description}
+                  </Text>
+                  <Button colorScheme="teal" variant="outline" w="100%">
+                    Explore {category.title}
+                  </Button>
+                </Box>
+              </Box>
+            ))}
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
   );
-}
+};
+
+export default Page;
