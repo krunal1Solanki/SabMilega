@@ -1,9 +1,12 @@
+"use client"
 import React from 'react';
 import { Flex, Heading, Box, Button } from '@chakra-ui/react';
 import Image from 'next/image';
 import logo from '../../public/sab-milega-high-resolution-logo-black-transparent.png';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter()
   return (
     <Flex
       bg="teal.500"
@@ -12,7 +15,7 @@ const Header = () => {
       justifyContent="space-between"
       alignItems="center"
       boxShadow="md"
-      position="fixed"
+      position="sticky"
       width="100%"
       zIndex={10}
       mb={10}
@@ -38,10 +41,10 @@ const Header = () => {
       </Flex>
 
       <Box>
-        <Button colorScheme="teal" variant="outline" mr={4}>
+        <Button colorScheme="teal" variant="outline"  onClick={()=> router.push('/login')} mr={4}>
           Sign In
         </Button>
-        <Button colorScheme="teal">Sign Up</Button>
+        <Button colorScheme="teal" onClick={()=> router.push('/signup')}>Sign Up</Button>
       </Box>
     </Flex>
   );
